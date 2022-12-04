@@ -4,15 +4,23 @@
 user="root"
 echo "What is the user? (default: root)"
 read username
-if [ "$username" = "" ]
+if [ "$username" = "" ];
 	then username="root"
 fi
+echo "Please input key file location (default: blank)"
+read keyInput
+if [ "$keyInput" = "" ];
+	then keyLocation=""
+else keyLocation="-i $keyInput"
+fi
+
 echo "User: $username"
+echo "Key: $keyInput"
 echo "What is the IP of the server? "
 read userip
 showDate=(date +"%m-%d-%Y @ %H:%M:%S")
 
-ssh -tt $username@$userip <<\EOF
+ssh -tt $username@$userip $keyLocation <<\EOF
 
 ##HIDES INPUT
 stty -echo
