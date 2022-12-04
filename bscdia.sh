@@ -24,7 +24,7 @@ gpuName=$(lspci | grep "VGA compatible controller" | cut -d " " -f 5-)
 ram=$(free -h | grep "Mem:" | xargs)
 hdd=$(df -h | grep "/dev/")
 publicip=$(curl -s ifconfig.me && echo | xargs)
-localip=$(ifconfig | grep -A 2 "flags")
+localip=$(ip a | grep -E ".: .+:|.+\..+\..+\..+/..|inet6")
 user=$(whoami)
 workingOS=$(cat /etc/os-release | grep -A 1 -w "NAME=" | cut -d "\"" -f 2)
 showDate=$(date +"%m-%d-%Y @ %H:%M:%S")
@@ -106,7 +106,7 @@ Cloudflare DNS: $cDom
 -=$dnsStatus=-
 
 Public: $publicip
-Interfaces: 
+Interfaces (IPv4/IPv6 only): 
 $localip
 -------------
 limit
