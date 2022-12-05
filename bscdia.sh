@@ -25,7 +25,7 @@ if [ "$ipcheck" != "$userip" ]; then
 	domain="$userip"
 else domain="Not provided"
 fi
-getRecords=$(dig $domain | grep -E ".+\s+.+\s.+\s+.+\..+\..+\..+" | grep -v "<<>>")
+getRecords=$(host $domain)
 if [ "$domain" == "Not provided" ]; then
 	getRecords="Not provided"
 fi
@@ -54,7 +54,7 @@ checkGdom=$(ping -c 1 google.com | grep "1 received," | xargs | cut -d " " -f 4,
 checkCdom=$(ping -c 1 cloudflare.com | grep "1 received," | xargs | cut -d " " -f 4,5)
 localip=$(ip a | grep -E ".: .+:|.+\..+\..+\..+/..|inet6")
 publicip=$(curl -s ifconfig.me && echo | xargs)
-getRecordsLocal=$(dig $publicip | grep -E ".+\s+.+\s.+\s+.+\..+\..+\..+" | grep -v "<<>>")
+getRecordsLocal=$(host $publicip)
 
 ## IP CHECK
 if [ "$checkGip" = "1 received," ]; then
