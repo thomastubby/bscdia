@@ -22,10 +22,11 @@ echo "What is the IP/domain of the server? "
 read userip
 ipcheck=$(echo $userip | grep -E ".+\..+\..+\.+")
 if [ "$ipcheck" != "$userip" ]; then
-	domain="$userip"
+	domain="$userip" &&
+	getRecords=$(host $domain)
 else domain="Not provided"
 fi
-getRecords=$(host $domain)
+
 if [ "$domain" == "Not provided" ]; then
 	getRecords="Not provided"
 fi
