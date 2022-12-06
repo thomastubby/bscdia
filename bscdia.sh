@@ -1,5 +1,3 @@
-#by: Tom Stein
-
 #!/bin/bash
 showDate=(date +"%m-%d-%Y @ %H:%M:%S")
 user="root"
